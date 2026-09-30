@@ -1,0 +1,163 @@
+---
+- summary: |
+    Проверка регистрации пользователя с корректными логином и паролем
+  requirement: |
+    Пользователь должен иметь возможность зарегистрировать новый аккаунт, указав логин, email и пароль.
+  prerequisites: |
+    Открыта странциа регистрации - https://codebattle.hexlet.io/users/new?next=/
+  test-data: |
+    Nickname = ilona Password = password123 Email = Email@gmail.com
+  steps:
+    - Вводим логин
+    - Вводим пароль
+    - Вводим email
+    - Нажимаем кнопку «Submit»
+  expected-result: |
+    Пользователь должен попасть на страницу входа и увидеть сообщение о необходимости подтверждения почты
+
+- summary: |
+    Невозможность регистрации с уже существующим в системе Email
+  requirement: |
+    Система должна блокировать регистрацию при вводе некорректного формата email, некорректного/слишком короткого пароля или если указанный email/логин уже занят.
+  prerequisites:
+    Открыта странциа регистрации - https://codebattle.hexlet.io/users/new?next=/
+  test-data: |
+    Nickname = ilona Password = password123 Email = Email@gmail.com
+  steps:
+    - Вводим логин
+    - Вводим пароль
+    - Вводим email
+    - Нажимаем кнопку «Submit»
+  expected-result: |
+    Пользователь должен получить сообщение об ошибке
+
+- summary: |
+    Невозможность регистрации с уже существующим в системе логином
+  requirement: |
+    Система должна блокировать регистрацию при вводе некорректного формата email, некорректного/слишком короткого пароля или если указанный email/логин уже занят.
+  prerequisites:
+    Открыта странциа регистрации - https://codebattle.hexlet.io/users/new?next=/
+    Открыт DevTools на вкладе NetWork
+  test-data: |
+    Nickname = onSTRANN1Y Password = password123 Email = Email@gmail.com
+  steps:
+    - Вводим логин
+    - Вводим пароль
+    - Вводим email
+    - Нажимаем кнопку «Submit»
+  expected-result: |
+    Пользователь должен получить сообщение об ошибке
+    В DevTools сервер возвращает статус 422
+
+- summary: |
+    Проверка защиты от Stored XSS в поле Логин
+  requirement: |
+    Система должна блокировать регистрацию при вводе некорректного формата email, некорректного/слишком короткого пароля или если указанный email/логин уже занят.
+  prerequisites:
+    Открыта странциа регистрации - https://codebattle.hexlet.io/users/new?next=/
+  test-data: |
+    Nickname = <svg/onload=a()>
+    Password = password123
+    Email = Email@gmail.com
+  steps:
+    - Вводим логин
+    - Вводим пароль
+    - Вводим email
+    - Нажимаем кнопку «Submit»
+  expected-result: |
+    Система отклоняет регистрацию с ошибкой: «Must consist of Latin letters, numbers and underscores. Only begin with latin letter»
+
+- summary: |
+    Проверка защиты от SQL-инъекций (SQLi) в поле Логин
+  requirement: |
+    Система должна блокировать регистрацию при вводе некорректного формата email, некорректного/слишком короткого пароля или если указанный email/логин уже занят.
+  prerequisites:
+    Открыта странциа регистрации - https://codebattle.hexlet.io/users/new?next=/
+  test-data: |
+    Nickname = admin' -- 
+    Password = password123
+    Email = Email@gmail.com
+  steps:
+    - Вводим логин
+    - Вводим пароль
+    - Вводим email
+    - Нажимаем кнопку «Submit»
+  expected-result: |
+    Система отклоняет регистрацию с ошибкой: «Must consist of Latin letters, numbers and underscores. Only begin with latin letter»
+
+- summary: |
+    Успешный вход с верными email и паролем
+  requirement: |
+    Пользователь должен иметь возможность войти в систему с использованием верных логина/email и пароля.
+  prerequisites:
+    Открыта странциа входа - https://codebattle.hexlet.io/session/new?locale=en&next=%2F
+  test-data: |
+    Password = password123 Email = Email@gmail.com
+  steps:
+    - Вводим пароль
+    - Вводим email
+    - Нажимаем кнопку «Submit»
+  expected-result: |
+    Вход в аккаунт произведен. Открыта главаная страница сайта
+
+- summary: |
+    Проверка на возможность входа с некорректным email
+  requirement: |
+    При вводе неверного пароля или несуществующего логина/email система должна блокировать вход и выводить понятное сообщение об ошибке.
+  prerequisites:
+    Открыта странциа входа - https://codebattle.hexlet.io/session/new?locale=en&next=%2F
+  test-data: |
+    Password = password123 Email = error@gmail.com
+  steps:
+    - Вводим пароль
+    - Вводим email
+    - Нажимаем кнопку «Submit»
+  expected-result: |
+    Вход в аккаунт не произведен. Появилось уведомлен 'Invalid email or password'
+
+
+- summary: |
+    Проверка на возможность входа с некорректным паролем
+  requirement: |
+    При вводе неверного пароля или несуществующего логина/email система должна блокировать вход и выводить понятное сообщение об ошибке.
+  prerequisites:
+    Открыта странциа входа - https://codebattle.hexlet.io/session/new?locale=en&next=%2F
+  test-data: |
+    Password = error Email = Email@gmail.com
+  steps:
+    - Вводим пароль
+    - Вводим email
+    - Нажимаем кнопку «Submit»
+  expected-result: |
+    Вход в аккаунт не произведен. Появилось уведомлен 'Invalid email or password'
+
+- summary: |
+    Успешный вход с помощью GitHub
+  requirement: |
+    Пользователь должен иметь возможность войти в систему через сторонний OAuth-сервис (GitHub).
+  prerequisites:
+    Открыта странциа входа - https://codebattle.hexlet.io/session/new?locale=en&next=%2F
+    Имеется аккаунт GitHub
+  test-data: |
+    <Empty>
+  steps:
+    - Нажать кнопку 'Sign in with GitHub'
+    - Войти в аккаунт GitHub
+    - Подтвердить согласие на обработку данных
+  expected-result: |
+    Произошло перенаправление обратно на наш сайт. Произведен успешный вход
+
+- summary: |
+    Проверка на возможность выхода из аккаунта
+  requirement: |
+    Авторизованный пользователь должен иметь возможность выйти из своей учетной записи (Logout).
+  prerequisites:
+    Произведен вход в аккаунт
+    Открыта главная странциа - https://codebattle.hexlet.io
+  test-data: |
+    <Empty>
+  steps:
+    - Нажать на свой ник сверху экрана
+    - Нажать кнопку 'Выйти'
+  expected-result: |
+    Произведен успешный Logout
