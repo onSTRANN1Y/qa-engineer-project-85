@@ -4,16 +4,17 @@
   requirement: |
     Пользователь должен иметь возможность зарегистрировать новый аккаунт, указав логин, email и пароль.
   prerequisites: |
-    Открыта страница регистрации — https://codebattle.hexlet.io/users/new?next=/
+    Открыта главная страница — https://codebattle.hexlet.io
     Пользователь с указанными ником и email не зарегистрирован (данные должны быть уникальными при каждом прогоне)
   test-data: |
-    Nickname = ilona
+    Новый email
     Password = password123
-    Email = Email@gmail.com
+    Новый Nickname
   steps:
-    - Ввести в поле Nickname значение из test-data
+    - Нажать кнопку 'Sign up'
+    - Ввести в поле новый Nickname
     - Ввести в поле Password значение из test-data
-    - Ввести в поле Email значение из test-data
+    - Ввести в поле новый email Email
     - Нажать кнопку «Submit»
   expected-result: |
     Открыта страница входа, отображается сообщение о необходимости подтвердить почту.
@@ -23,7 +24,7 @@
   requirement: |
     Система должна блокировать регистрацию при вводе некорректного формата email, некорректного/слишком короткого пароля или если указанный email/логин уже занят.
   prerequisites: |
-    Открыта страница регистрации — https://codebattle.hexlet.io/users/new?next=/
+    Открыта главная страница — https://codebattle.hexlet.io
     Пользователь с email Email@gmail.com уже зарегистрирован
     Ник ilona_new в системе не занят
   test-data: |
@@ -31,6 +32,7 @@
     Password = password123
     Email = Email@gmail.com
   steps:
+    - Нажать кнопку 'Sign up'
     - Ввести в поле Nickname значение из test-data
     - Ввести в поле Password значение из test-data
     - Ввести в поле Email значение из test-data
@@ -43,15 +45,16 @@
   requirement: |
     Система должна блокировать регистрацию при вводе некорректного формата email, некорректного/слишком короткого пароля или если указанный email/логин уже занят.
   prerequisites: |
-    Открыта страница регистрации — https://codebattle.hexlet.io/users/new?next=/
+    Открыта главная страница — https://codebattle.hexlet.io
     Открыт DevTools на вкладке Network
-    Пользователь с ником onSTRANN1Y уже зарегистрирован
+    Пользователь с ником ilona_new1 уже зарегистрирован
     Email new_email@gmail.com в системе не занят
   test-data: |
-    Nickname = onSTRANN1Y
+    Nickname = ilona_new1
     Password = password123
     Email = new_email@gmail.com
   steps:
+    - Нажать кнопку 'Sign up'
     - Ввести в поле Nickname значение из test-data
     - Ввести в поле Password значение из test-data
     - Ввести в поле Email значение из test-data
@@ -65,12 +68,13 @@
   requirement: |
     Система должна блокировать регистрацию при вводе некорректного формата email, некорректного/слишком короткого пароля или если указанный email/логин уже занят.
   prerequisites: |
-    Открыта страница регистрации — https://codebattle.hexlet.io/users/new?next=/
+    Открыта главная страница — https://codebattle.hexlet.io
   test-data: |
     Nickname = ilona_email
     Password = password123
     Email = email.gmail.com
   steps:
+    - Нажать кнопку 'Sign up'
     - Ввести в поле Nickname значение из test-data
     - Ввести в поле Password значение из test-data
     - Ввести в поле Email значение из test-data
@@ -83,12 +87,13 @@
   requirement: |
     Система должна блокировать регистрацию при вводе некорректного формата email, некорректного/слишком короткого пароля или если указанный email/логин уже занят.
   prerequisites: |
-    Открыта страница регистрации — https://codebattle.hexlet.io/users/new?next=/
+    Открыта главная страница — https://codebattle.hexlet.io
   test-data: |
     Nickname = ilona_pass
     Password = 123
     Email = short_pass@gmail.com
   steps:
+    - Нажать кнопку 'Sign up'
     - Ввести в поле Nickname значение из test-data
     - Ввести в поле Password значение из test-data
     - Ввести в поле Email значение из test-data
@@ -101,12 +106,13 @@
   requirement: |
     Система должна блокировать регистрацию при вводе некорректного формата email, некорректного/слишком короткого пароля или если указанный email/логин уже занят.
   prerequisites: |
-    Открыта страница регистрации — https://codebattle.hexlet.io/users/new?next=/
+    Открыта главная страница — https://codebattle.hexlet.io
   test-data: |
     Nickname = <пусто>
     Password = <пусто>
     Email = <пусто>
   steps:
+    - Нажать кнопку 'Sign up'
     - Оставить поля Nickname, Password и Email пустыми
     - Нажать кнопку «Submit»
   expected-result: |
@@ -117,12 +123,13 @@
   requirement: |
     Система должна блокировать регистрацию при вводе некорректного формата email, некорректного/слишком короткого пароля или если указанный email/логин уже занят.
   prerequisites: |
-    Открыта страница регистрации — https://codebattle.hexlet.io/users/new?next=/
+    Открыта главная страница — https://codebattle.hexlet.io
   test-data: |
     Nickname = <svg/onload=a()>
     Password = password123
     Email = xss_test@gmail.com
   steps:
+    - Нажать кнопку 'Sign up'
     - Ввести в поле Nickname значение из test-data
     - Ввести в поле Password значение из test-data
     - Ввести в поле Email значение из test-data
@@ -136,13 +143,14 @@
   requirement: |
     Система должна блокировать регистрацию при вводе некорректного формата email, некорректного/слишком короткого пароля или если указанный email/логин уже занят.
   prerequisites: |
-    Открыта страница регистрации — https://codebattle.hexlet.io/users/new?next=/
+    Открыта главная страница — https://codebattle.hexlet.io
   test-data: |
     Nickname = admin' --
     Password = password123
     Email = sqli_test@gmail.com
     (после «--» в нике стоит пробел)
   steps:
+    - Нажать кнопку 'Sign up'
     - Ввести в поле Nickname значение из test-data
     - Ввести в поле Password значение из test-data
     - Ввести в поле Email значение из test-data
@@ -155,12 +163,13 @@
   requirement: |
     Пользователь должен иметь возможность войти в систему с использованием верных логина/email и пароля.
   prerequisites: |
-    Открыта страница входа — https://codebattle.hexlet.io/session/new?locale=en&next=%2F
+    Открыта главная страница — https://codebattle.hexlet.io
     Существует зарегистрированный аккаунт с подтверждённой почтой
   test-data: |
     Email = Email@gmail.com
     Password = password123
   steps:
+    - Нажать кнопку 'Sign in'
     - Ввести в поле Email значение из test-data
     - Ввести в поле Password значение из test-data
     - Нажать кнопку «Submit»
@@ -172,12 +181,13 @@
   requirement: |
     При вводе неверного пароля или несуществующего логина/email система должна блокировать вход и выводить понятное сообщение об ошибке.
   prerequisites: |
-    Открыта страница входа — https://codebattle.hexlet.io/session/new?locale=en&next=%2F
+    Открыта главная страница — https://codebattle.hexlet.io
     Пользователь с email error@gmail.com не зарегистрирован
   test-data: |
     Email = error@gmail.com
     Password = password123
   steps:
+    - Нажать кнопку 'Sign in'
     - Ввести в поле Email значение из test-data
     - Ввести в поле Password значение из test-data
     - Нажать кнопку «Submit»
@@ -189,12 +199,13 @@
   requirement: |
     При вводе неверного пароля или несуществующего логина/email система должна блокировать вход и выводить понятное сообщение об ошибке.
   prerequisites: |
-    Открыта страница входа — https://codebattle.hexlet.io/session/new?locale=en&next=%2F
+    Открыта главная страница — https://codebattle.hexlet.io
     Существует зарегистрированный аккаунт с email Email@gmail.com
   test-data: |
     Email = Email@gmail.com
     Password = error
   steps:
+    - Нажать кнопку 'Sign in'
     - Ввести в поле Email значение из test-data
     - Ввести в поле Password значение из test-data
     - Нажать кнопку «Submit»
@@ -206,12 +217,13 @@
   requirement: |
     Пользователь должен иметь возможность войти в систему через сторонний OAuth-сервис (GitHub).
   prerequisites: |
-    Открыта страница входа — https://codebattle.hexlet.io/session/new?locale=en&next=%2F
+    Открыта главная страница — https://codebattle.hexlet.io
     Имеется аккаунт GitHub
     Сервис GitHub доступен
   test-data: |
     Учётные данные собственного аккаунта GitHub
   steps:
+    - Нажать кнопку 'Sign in'
     - Нажать кнопку 'Sign in with GitHub'
     - Войти в аккаунт GitHub
     - Подтвердить согласие на обработку данных
